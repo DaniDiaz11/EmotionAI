@@ -1,0 +1,30 @@
+# requirements.txt actualizado
+# Ejecutar en terminal con venv activado:
+#
+#   pip install -r requirements.txt
+#
+# O instalar solo las nuevas dependencias:
+#
+#   pip install transformers torch sentencepiece
+#
+# NOTA SOBRE TORCH:
+# torch es PyTorch, el framework de deep learning que usa
+# Hugging Face internamente para correr el modelo de IA.
+# Es una descarga grande (~2GB con CUDA o ~200MB CPU-only).
+# Para un proyecto de desarrollo sin GPU, instalar la versión CPU:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# Esto reduce la descarga a ~200MB.
+
+# ── Dependencias existentes ──────────────────────────────────
+django
+djangorestframework
+
+# ── Dependencias nuevas para IA ──────────────────────────────
+transformers       # Librería principal de Hugging Face
+                   # Contiene el pipeline() y los modelos preentrenados
+
+torch              # PyTorch: motor de deep learning usado por transformers
+                   # Para CPU only: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+sentencepiece      # Tokenizador requerido por el modelo distilroberta
+                   # Convierte texto a tokens numéricos antes de la inferencia

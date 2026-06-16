@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmotionAI — Iniciar sesión</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+   
+    .card-header {
+      background: #2E4A6E;
+      color: white;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .card-header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+ 
+    .card-header p {
+      font-size: 13px;
+      opacity: 0.75;
+    }
+
+    
+    .card-body {
+      padding: 28px 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      border: 1.5px solid #ddd;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      color: #1a1a1a;
+    }
+
+    input:focus { border-color: #2E4A6E; }
+
+    input::placeholder { color: #bbb; }
+
+    .btn-principal {
+      width: 100%;
+      padding: 12px;
+      background: #2E4A6E;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+
+    .btn-principal:hover { background: #1F3A5F; }
+
+    .error {
+      background: #FFEBEE;
+      color: #B71C1C;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .enlaces {
+      text-align: center;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .enlaces a {
+      color: #2E4A6E;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .enlaces a:hover { text-decoration: underline; }
+
+    .separador { color: #ccc; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="card-header">
+    <h1>EmotionAI</h1>
+    <p>Tu espacio de bienestar emocional</p>
+  </div>
+
+  <div class="card-body">
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="error">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+
+      <label for="id_username">Usuario</label>
+      {{ form.username }}
+
+      <label for="id_password">Contraseña</label>
+      <div style="position: relative;">
+        {{ form.password }}
+        <button type="button"
+                onclick="togglePassword('id_password', this)"
+                style="
+                  position: absolute;
+                  right: 12px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  color: #888;
+                  font-size: 16px;
+                  padding: 0;
+                ">🔒</button>
+      </div>
+
+      <button type="submit" class="btn-principal">Iniciar sesión</button>
+    </form>
+
+    <div class="enlaces">
+      <a href="/recuperar/">¿Olvidaste tu contraseña?</a>
+      <span class="separador">|</span>
+      <a href="/registro/">Crear cuenta</a>
+    </div>
+
+  </div>
+</div>
+
+  <script>
+      function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🔓';
+      } else {
+        input.type = 'password';
+        btn.textContent = '🔒';
+      }
+    }
+  </script>
+
+</body>
+</html>
